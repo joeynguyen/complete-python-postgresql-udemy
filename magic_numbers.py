@@ -13,18 +13,19 @@ magic_numbers = [
     random.randint(0,9),
     random.randint(0,9)
 ]
-chances = 3
-guess_correct = False
+def ask_user_and_check_number_x_times(chances):
+    guess_correct = False
+    while chances > 0 and guess_correct == False:
+        user_number = input('Enter a number between 0 and 9: ')
+        if int(user_number) in magic_numbers:
+            print("You guessed right!")
+            guess_correct = True
+        else:
+            print('You guessed wrong')
+            chances -= 1
+            print('You have {} chances left'.format(chances))
 
-while chances > 0 and guess_correct == False:
-    user_number = input('Enter a number between 0 and 9: ')
-    if int(user_number) in magic_numbers:
-        print("You guessed right!")
-        guess_correct = True
-    else:
-        print('You guessed wrong')
-        chances -= 1
-        print('You have {} chances left'.format(chances))
+ask_user_and_check_number_x_times(4)
 
 minimum = 100
 for index in range(10):
