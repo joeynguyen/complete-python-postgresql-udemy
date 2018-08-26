@@ -1,3 +1,4 @@
+# lists in python are like an array in JS
 numbers = '5,6,8,4'
 numbers_array = numbers.split(',')
 print('numbers_array', numbers_array)
