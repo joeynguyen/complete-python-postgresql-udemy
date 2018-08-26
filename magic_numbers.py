@@ -31,7 +31,6 @@ minimum = 100
 for index in range(10):
     random_number = random.randint(0, 100)
     print('current number is {}'.format(random_number))
-    if random_number < minimum:
-        minimum = random_number
+    minimum = random_number if random_number < minimum else minimum
 
 print('minimum is {}'.format(minimum))
