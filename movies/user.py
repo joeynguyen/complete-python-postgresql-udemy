@@ -10,6 +10,10 @@ class User:
     def add_movie(self, name, genre):
         self.movies.append(Movie(name, genre, False))
 
+    def delete_movie(self, movie_name):
+        movies_to_not_delete = list(filter(lambda x: x.name != movie_name, self.movies))
+        self.movies = movies_to_not_delete
+
     def watch_movie(self, movie_name):
         movie = list(filter(lambda x: x.name == movie_name, self.movies))
         if len(movie) == 1:
