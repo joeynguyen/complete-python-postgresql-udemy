@@ -21,5 +21,12 @@ class User:
 
     def get_watched_movies(self):
         watched_movies = list(filter(lambda x: x.watched, self.movies))
-
         return watched_movies
+
+    def save_to_file(self):
+        file_name = self.name + '.csv'
+        with open(file_name, 'w') as f:
+            f.write(self.name + '\n')
+            for movie in self.movies:
+                movie_details = [movie.name, movie.genre, str(movie.watched)]
+                f.write(','.join(movie_details) + '\n')

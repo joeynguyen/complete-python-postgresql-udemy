@@ -19,3 +19,5 @@ user.delete_movie('The Matrix')
 print(user)
 print("Movies collection: ", user.movies)
 print("Watched movies: ", user.get_watched_movies())
+
+user.save_to_file()
