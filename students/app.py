@@ -1,34 +1,25 @@
-def create_student(name, grades):
-    if name == '':
-        user_name = input("Enter student name: ")
-    else:
-        user_name = name
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.grades = []
 
-    return {'name': user_name,
-            'grades': grades}
+def create_student():
+    name = input("Enter student name: ")
+    return Student(name)
 
 def add_grade(student, grade):
-    student['grades'].append(grade)
+    student.grades.append(grade)
 
 def calculate_avg_grade(student):
-    count = len(student['grades'])
+    count = len(student.grades)
     if count == 0:
         return 0
 
-    total = sum(student['grades'])
+    total = sum(student.grades)
     return total / count
 
-new_student1 = create_student('Tim', [])
-
-new_student1['grades'].append(5)
-print(new_student1)
-
-add_grade(new_student1, 90)
-print(new_student1)
-
-
 def print_student_details(student):
-    print("{}, average grade: {}.".format(student['name'],
+    print("{}, average grade: {}.".format(student.name,
                                           calculate_avg_grade(student)
                                          )
          )
@@ -52,7 +43,7 @@ def menu():
         if selection == 'p':
             print_student_list(student_list)
         elif selection == 's':
-            new_student = create_student('', [])
+            new_student = create_student()
             student_list.append(new_student)
         elif selection == 'a':
             id = int(input("Enter the ID of the student to add a grade to: "))
