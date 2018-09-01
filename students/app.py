@@ -3,6 +3,14 @@ class Student:
         self.name = name
         self.grades = []
 
+    def average_grade(self):
+        count = len(self.grades)
+        if count == 0:
+            return 0
+
+        total = sum(self.grades)
+        return total / count
+
 def create_student():
     name = input("Enter student name: ")
     return Student(name)
@@ -10,17 +18,9 @@ def create_student():
 def add_grade(student, grade):
     student.grades.append(grade)
 
-def calculate_avg_grade(student):
-    count = len(student.grades)
-    if count == 0:
-        return 0
-
-    total = sum(student.grades)
-    return total / count
-
 def print_student_details(student):
     print("{}, average grade: {}.".format(student.name,
-                                          calculate_avg_grade(student)
+                                          student.average_grade()
                                          )
          )
 
