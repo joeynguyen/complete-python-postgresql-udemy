@@ -4,12 +4,9 @@ class User:
         self.movies = []
 
     def __repr__(self):
-        return "<User {} movies: {}>".format(self.name, [movie for movie in self.movies])
+        return "<User {}>".format(self.name)
 
     def get_watched_movies(self):
-        watched_movies = []
-        for movie in self.movies:
-            if movie.watched == True:
-                watched_movies.append(movie)
+        watched_movies = list(filter(lambda x: x.watched, self.movies))
 
         return watched_movies
