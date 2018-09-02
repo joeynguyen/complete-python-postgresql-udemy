@@ -30,3 +30,21 @@ class User:
             for movie in self.movies:
                 movie_details = [movie.name, movie.genre, str(movie.watched)]
                 f.write(','.join(movie_details) + '\n')
+
+    def read_user_data_from_file(self, file_name):
+        with open(file_name, 'r') as f:
+            content = f.readlines()
+            # content[0] is first line of file
+            username = content[0]
+            user_movies = []
+            # start loop from second line until end of file
+            for line in content[1:]:
+                line = line.strip() # remove whitespace (new line code '\n')
+                movie_data = line.split(',')
+                # last argument is converted string to boolean
+                movie = Movie(movie_data[0], movie_data[1], movie_data[2] == 'True')
+                user_movies.append(movie)
+
+            user = User(username)
+            user.movies = user_movies
+            return user

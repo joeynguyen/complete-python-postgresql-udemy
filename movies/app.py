@@ -1,7 +1,8 @@
 from movie import Movie
 from user import User
 
-user = User('Joe')
+username = 'Joe'
+user = User(username)
 user.add_movie('The Matrix', 'Sci-Fi')
 user.add_movie('Spirited Away', 'Fantasy')
 user.add_movie('Zoolander', 'Comedy')
@@ -20,4 +21,12 @@ print(user)
 print("Movies collection: ", user.movies)
 print("Watched movies: ", user.get_watched_movies())
 
+print("")
+print("Saving to file...")
 user.save_to_file()
+
+print("")
+print("Reading from file...")
+my_user = user.read_user_data_from_file(username + '.csv')
+print('my_user', my_user.name)
+print('my_user movies', my_user.movies)
