@@ -27,6 +27,6 @@ user.save_to_file()
 
 print("")
 print("Reading from file...")
-my_user = user.read_user_data_from_file(username + '.csv')
+my_user = User.read_user_data_from_file(username + '.csv')
 print('my_user', my_user.name)
 print('my_user movies', my_user.movies)

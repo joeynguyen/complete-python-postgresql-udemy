@@ -31,7 +31,8 @@ class User:
                 movie_details = [movie.name, movie.genre, str(movie.watched)]
                 f.write(','.join(movie_details) + '\n')
 
-    def read_user_data_from_file(self, file_name):
+    @classmethod
+    def read_user_data_from_file(cls, file_name):
         with open(file_name, 'r') as f:
             content = f.readlines()
             # content[0] is first line of file
@@ -45,6 +46,6 @@ class User:
                 movie = Movie(movie_data[0], movie_data[1], movie_data[2] == 'True')
                 user_movies.append(movie)
 
-            user = User(username)
+            user = cls(username)
             user.movies = user_movies
             return user
