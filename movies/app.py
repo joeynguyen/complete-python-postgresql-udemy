@@ -22,6 +22,8 @@ print("Movies collection: ", user.movies)
 print("Watched movies: ", user.get_watched_movies())
 print('user json', user.json())
 user.save_to_json()
+json_data = User.read_from_json(username + '.json')
+print('json_data', json_data)
 
 print("")
 print("Saving to file...")

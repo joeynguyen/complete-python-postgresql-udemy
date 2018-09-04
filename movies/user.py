@@ -60,5 +60,11 @@ class User:
         }
 
     def save_to_json(self):
-        with open ('my_file.json', 'w') as f:
+        file_name = self.name + '.json'
+        with open (file_name, 'w') as f:
             json.dump(self.json(), f)
+
+    @classmethod
+    def read_from_json(cls, file_name):
+        with open(file_name, 'r') as f:
+            return json.load(f)
