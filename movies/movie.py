@@ -9,3 +9,10 @@ class Movie:
 
     def mark_movie_watched(self, watched):
         self.watched = watched
+
+    def json(self):
+        return {
+            'name': self.name,
+            'genre': self.genre,
+            'watched': self.watched
+        }

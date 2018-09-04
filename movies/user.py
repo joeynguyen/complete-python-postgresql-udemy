@@ -1,3 +1,4 @@
+import json
 from movie import Movie
 class User:
     def __init__(self, name):
@@ -49,3 +50,15 @@ class User:
             user = cls(username)
             user.movies = user_movies
             return user
+
+    def json(self):
+        return {
+            'name': self.name,
+            'movies': [
+                movie.json() for movie in self.movies
+            ]
+        }
+
+    def save_to_json(self):
+        with open ('my_file.json', 'w') as f:
+            json.dump(self.json(), f)

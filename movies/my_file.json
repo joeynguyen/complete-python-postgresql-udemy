@@ -1,0 +1,15 @@
+{
+    "name": "Joe",
+    "movies": [
+        {
+            "name": "Spirited Away",
+            "genre": "Fantasy",
+            "watched": true
+        },
+        {
+            "name": "Zoolander",
+            "genre": "Comedy",
+            "watched": false
+        }
+    ]
+}
