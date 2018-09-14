@@ -65,6 +65,11 @@ class User:
             json.dump(self.json(), f)
 
     @classmethod
-    def read_from_json(cls, file_name):
-        with open(file_name, 'r') as f:
-            return json.load(f)
+    def read_from_json(cls, json_data):
+        user = User(json_data['name'])
+        movies = []
+        for movie_data in json_data['movies']:
+            movies.append(Movie.from_json(movie_data))
+        user.movies = movies
+
+        return user

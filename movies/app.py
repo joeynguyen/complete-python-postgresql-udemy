@@ -1,3 +1,4 @@
+import json
 from movie import Movie
 from user import User
 
@@ -8,7 +9,6 @@ user.add_movie('Spirited Away', 'Fantasy')
 user.add_movie('Zoolander', 'Comedy')
 
 user.watch_movie('Spirited Away')
-
 
 print(user)
 print("Movies collection: ", user.movies)
@@ -22,8 +22,11 @@ print("Movies collection: ", user.movies)
 print("Watched movies: ", user.get_watched_movies())
 print('user json', user.json())
 user.save_to_json()
-json_data = User.read_from_json(username + '.json')
-print('json_data', json_data)
+with open(username + '.json', 'r') as f:
+    json_data = json.load(f)
+    user = User.read_from_json(json_data)
+    print('json_data', user.json())
+
 
 print("")
 print("Saving to file...")
