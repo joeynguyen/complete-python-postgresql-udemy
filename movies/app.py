@@ -14,18 +14,28 @@ def menu():
 
     selection = input(selection_text)
 
-    if selection == 'a':
-        pass
-    elif selection == 's':
-        pass
-    elif selection == 'w':
-        pass
-    elif selection == 'd':
-        pass
-    elif selection == 'l':
-        pass
-    elif selection == 'q':
-        pass
+    while selection != 'q':
+        if selection == 'a':
+            movie_name = input("Enter the movie name: ")
+            movie_genre = input("Enter the movie genre: ")
+            user.add_movie(movie_name, movie_genre)
+        elif selection == 's':
+            for movie in user.movies:
+                print("Name: {} Genre: {} Watched: {}.".format(movie.name, movie.genre, movie.watched))
+        elif selection == 'w':
+            movie_name = input("Enter the movie name to be set as watched ")
+            user.watch_movie(movie_name)
+        elif selection == 'd':
+            movie_name = input("Enter the movie name to delete ")
+            user.delete_movie(movie_name)
+        elif selection == 'l':
+            for movie in user.get_watched_movies():
+                print("Name: {} Genre: {} Watched: {}.".format(movie.name, movie.genre, movie.watched))
+
+        selection = input(selection_text)
+
+    with open(filename, 'w') as f:
+        json.dump(user.json(), f)
 
 selection_text = """
     Enter 'a' to add a movie,
