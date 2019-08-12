@@ -2,6 +2,7 @@ import os
 import json
 from user import User
 
+
 def menu():
     name = input('Enter your name: ')
     filename = '{}.txt'.format(name)
