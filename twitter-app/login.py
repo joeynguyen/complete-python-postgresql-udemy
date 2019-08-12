@@ -1,6 +1,7 @@
 import secrets
 import constants
 import oauth2
+import json
 import urllib.parse as urlparse
 
 consumer = oauth2.Consumer(secrets.CONSUMER_KEY, secrets.CONSUMER_SECRET)
@@ -42,4 +43,8 @@ response, content = authorized_client.request("{}?q=computers+filter:images".for
 if response.status != 200:
     print("An error occurred while searching!")
 
-print('tweets', content.decode('utf-8'))
+# convert response string into Python dict
+tweets = json.loads(content.decode('utf-8'))
+
+for s in tweets['statuses']:
+    print(s['text'])
