@@ -5,7 +5,7 @@
 ```sh
 pip3 install virtualenv # install
 virtualenv venv # initial setup
-source env/bin/activate # activate
+source venv/bin/activate # activate
 ```
 
 ## Install project dependencies

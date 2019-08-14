@@ -4,6 +4,11 @@ import oauth2
 import json
 import urllib.parse as urlparse
 
+from user import User
+from database import Database
+
+Database.initialise(user='joeynguyen', password='password', host='localhost', database='joeynguyen')
+
 consumer = oauth2.Consumer(secrets.CONSUMER_KEY, secrets.CONSUMER_SECRET)
 client = oauth2.Client(consumer)
 
@@ -32,6 +37,13 @@ response, content = client.request(constants.ACCESS_TOKEN_URL, 'POST')
 access_token = dict(urlparse.parse_qsl(content.decode('utf-8')))
 
 print('access_token', access_token)
+
+email = input("Enter your email: ")
+first_name = input("Enter your first_name: ")
+last_name = input("Enter your last_name: ")
+
+user = User(email, first_name, last_name, access_token['oauth_token'], access_token['oauth_token_secret'], None)
+user.save_to_db()
 
 # Create an 'authorized_token' Token object and use that to perform Twitter API calls on behalf of the user
 authorized_token = oauth2.Token(access_token['oauth_token'], access_token['oauth_token_secret'])
