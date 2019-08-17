@@ -25,11 +25,14 @@ class User:
         with CursorFromConnectionFromPool() as cursor:
             cursor.execute("SELECT * FROM users WHERE email=%s", (email,))
             user_data = cursor.fetchone()
-            return cls(
-                email=user_data[1],
-                first_name=user_data[2],
-                last_name=user_data[3],
-                oauth_token=user_data[4],
-                oauth_token_secret=user_data[5],
-                id=user_data[0],
-            )
+            if user_data:
+                return cls(
+                    email=user_data[1],
+                    first_name=user_data[2],
+                    last_name=user_data[3],
+                    oauth_token=user_data[4],
+                    oauth_token_secret=user_data[5],
+                    id=user_data[0],
+                )
+            else:
+                return None
