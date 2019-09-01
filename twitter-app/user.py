@@ -1,4 +1,8 @@
+import oauth2
+import json
+
 from database import CursorFromConnectionFromPool
+from twitter_utils import consumer
 
 
 class User:
@@ -36,3 +40,16 @@ class User:
                 )
             else:
                 return None
+
+    def twitter_request(self, uri, verb='GET'):
+        # Create an 'authorized_token' Token object and use that to perform Twitter API calls on behalf of the user
+        authorized_token = oauth2.Token(self.oauth_token, self.oauth_token_secret)
+        authorized_client = oauth2.Client(consumer, authorized_token)
+
+        # Make Twitter API calls
+        response, content = authorized_client.request(uri, verb)
+
+        if response.status != 200:
+            print("An error occurred while searching!")
+
+        return json.loads(content.decode('utf-8'))
