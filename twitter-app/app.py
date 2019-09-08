@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, request
+from flask import Flask, render_template, session, redirect, request, url_for
 
 from database import Database
 from user import User
@@ -30,7 +30,6 @@ def twitter_login():
 def twitter_auth():
     oauth_verifier = request.args.get('oauth_verifier')
     access_token = get_access_token(session['request_token'], oauth_verifier)
-    print('access_token', access_token)
 
     user = User.load_from_db(access_token['screen_name'])
     if not user:
@@ -42,7 +41,12 @@ def twitter_auth():
     print('session', session)
     print('user', user)
 
-    return user.screen_name
+    return redirect(url_for('profile'))
+
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html', screen_name=session['screen_name'])
 
 
 app.run(port=4995, debug=True)
