@@ -3,6 +3,7 @@ from flask import Flask, render_template, session, redirect, request, url_for, g
 from database import Database
 from user import User
 from twitter_utils import get_request_token, get_oauth_verifier_url, get_access_token
+import constants
 
 app = Flask(__name__)
 app.secret_key = '1234'
@@ -60,6 +61,17 @@ def twitter_auth():
 @app.route('/profile')
 def profile():
     return render_template('profile.html', user=g.user)
+
+
+@app.route('/search')
+def search():
+    query = request.args.get('q')
+    url = "{}?q={}+filter:images".format(constants.TWEETS_SEARCH_URL, query)
+    tweets = g.user.twitter_request(url)
+
+    tweet_texts = [s['text'] for s in tweets['statuses']]
+
+    return render_template('search.html', content=tweet_texts)
 
 
 app.run(port=4995, debug=True)
