@@ -1,4 +1,5 @@
 from flask import Flask, render_template, session, redirect, request, url_for, g
+import requests
 
 from database import Database
 from user import User
@@ -69,7 +70,13 @@ def search():
     url = "{}?q={}+filter:images".format(constants.TWEETS_SEARCH_URL, query)
     tweets = g.user.twitter_request(url)
 
-    tweet_texts = [s['text'] for s in tweets['statuses']]
+    tweet_texts = [{'tweet': s['text'], 'label': ''} for s in tweets['statuses']]
+
+    for tweet in tweet_texts:
+        r = requests.post('http://text-processing.com/api/sentiment/', data={'text': tweet['tweet']})
+        json_reponse = r.json()
+        label = json_reponse['label']
+        tweet['label'] = label
 
     return render_template('search.html', content=tweet_texts)
 

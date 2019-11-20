@@ -5,8 +5,14 @@
 </head>
 <body>
     <ul>
+    {% set css_color = 'black' %}
     {% for element in content %}
-        <li>{{ element }}</li>
+        {% if element['label'] == 'pos' %}
+            {% set css_color = 'green' %}
+        {% elif element['label'] == 'neg' %}
+            {% set css_color = 'red' %}
+        {% endif %}
+        <li style="color: {{ css_color }}">{{ element['tweet'] }}</li>
     {% endfor %}
     </ul>
 </body>
